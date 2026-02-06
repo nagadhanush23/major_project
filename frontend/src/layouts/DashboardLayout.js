@@ -11,7 +11,7 @@ import {
   FaBrain,
   FaBriefcase,
   FaStream,
-
+  FaChartLine,
   FaComments,
   FaSun,
   FaMoon,
@@ -31,6 +31,7 @@ const DashboardLayout = () => {
     { path: '/dashboard/transactions', icon: FaWallet, label: 'Transactions' },
     { path: '/dashboard/goals-limits', icon: FaCrosshairs, label: 'Goals & Limits' },
     { path: '/dashboard/financial-flow', icon: FaStream, label: 'Financial Flow' },
+    { path: '/dashboard/financial-advisor', icon: FaChartLine, label: 'Financial Advisor' },
     { path: '/dashboard/ai-analysis', icon: FaBrain, label: 'AI Analysis' },
     { path: '/dashboard/investment-advisor', icon: FaBriefcase, label: 'Investments' },
     { path: '/dashboard/ai-chat', icon: FaComments, label: 'AI Assistant' },
@@ -45,7 +46,7 @@ const DashboardLayout = () => {
             <div className="logo-icon">
               <FaDollarSign />
             </div>
-            <span className="logo-text">ExpenseEase</span>
+            <span className="logo-text">FinFlow</span>
           </div>
         </div>
 

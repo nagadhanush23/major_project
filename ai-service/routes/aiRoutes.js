@@ -14,7 +14,8 @@ const {
   forecastNeeds,
   suggestAllocation,
   extractReceiptData,
-  suggestExpenseDetails
+  suggestExpenseDetails,
+  getFinancialAdvisorAnalysis
 } = require('../controllers/aiController');
 
 // AI Analysis Routes
@@ -33,5 +34,6 @@ router.post('/suggest-allocation', suggestAllocation);
 // Expense Management AI Routes
 router.post('/extract-receipt', extractReceiptData);
 router.post('/suggest-expense-details', suggestExpenseDetails);
+router.post('/financial-advisor/analyze', getFinancialAdvisorAnalysis);
 
 module.exports = router;

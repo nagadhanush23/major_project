@@ -115,6 +115,10 @@ export const aiAPI = {
     const token = localStorage.getItem('token');
     return aiApi.post('/suggest-expense-details', { token, title, notes });
   },
+  getFinancialAdvisorAnalysis: (financialData) => {
+    const token = localStorage.getItem('token');
+    return aiApi.post('/financial-advisor/analyze', { token, financialData });
+  },
 };
 
 // Expense Management API

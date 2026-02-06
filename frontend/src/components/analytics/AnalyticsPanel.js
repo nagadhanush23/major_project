@@ -35,7 +35,7 @@ const AnalyticsPanel = ({ analytics }) => {
   // Prepare trends data
   const trendsData = analytics.trends || [];
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  
+
   // Group trends by month
   const trendsByMonth = {};
   trendsData.forEach((trend) => {
@@ -130,32 +130,56 @@ const AnalyticsPanel = ({ analytics }) => {
     <div className="analytics-panel">
       <h2>Analytics & Insights</h2>
 
+      {/* Projection Stats as Separate Cards */}
+      {analytics.projections && (
+        <div className="stats-cards" style={{ marginBottom: '2rem' }}>
+          <div className="stat-card balance positive">
+            <div className="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div className="stat-content">
+              <p className="stat-label">Current Balance</p>
+              <p className="stat-value">{formatCurrency(analytics.projections.currentBalance || 0)}</p>
+            </div>
+          </div>
+
+          <div className="stat-card income">
+            <div className="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </div>
+            <div className="stat-content">
+              <p className="stat-label">Avg Monthly Income</p>
+              <p className="stat-value">{formatCurrency(analytics.projections.averageMonthlyIncome || 0)}</p>
+            </div>
+          </div>
+
+          <div className="stat-card expense">
+            <div className="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </div>
+            <div className="stat-content">
+              <p className="stat-label">Avg Monthly Expense</p>
+              <p className="stat-value">{formatCurrency(analytics.projections.averageMonthlyExpense || 0)}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="analytics-grid">
         {analytics.projections && (
           <div className="analytics-card">
             <h3>Financial Projections</h3>
             <div className="chart-container">
               <Line data={projectionsData} options={chartOptions} />
-            </div>
-            <div className="projection-stats">
-              <div className="projection-stat">
-                <p className="stat-label">Current Balance</p>
-                <p className="stat-value">
-                  {formatCurrency(analytics.projections.currentBalance || 0)}
-                </p>
-              </div>
-              <div className="projection-stat">
-                <p className="stat-label">Avg Monthly Income</p>
-                <p className="stat-value">
-                  {formatCurrency(analytics.projections.averageMonthlyIncome || 0)}
-                </p>
-              </div>
-              <div className="projection-stat">
-                <p className="stat-label">Avg Monthly Expense</p>
-                <p className="stat-value">
-                  {formatCurrency(analytics.projections.averageMonthlyExpense || 0)}
-                </p>
-              </div>
             </div>
           </div>
         )}

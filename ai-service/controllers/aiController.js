@@ -797,6 +797,42 @@ const predictNecessity = async (req, res) => {
 
 
 
+// @desc    Financial Advisor Agent Analysis
+// @route   POST /api/ai/financial-advisor/analyze
+// @access  Private
+const getFinancialAdvisorAnalysis = async (req, res) => {
+  try {
+    const { token, financialData } = req.body;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Authentication token required' });
+    }
+
+    if (!financialData) {
+      return res.status(400).json({ message: 'Financial data is required' });
+    }
+
+    // 1. Budget Analysis
+    const budgetAnalysis = await aiService.performBudgetAnalysis(financialData);
+
+    // 2. Savings Strategy
+    const savingsStrategy = await aiService.performSavingsStrategy(financialData, budgetAnalysis);
+
+    // 3. Debt Reduction
+    const debtReduction = await aiService.performDebtReduction(financialData, budgetAnalysis, savingsStrategy);
+
+    res.json({
+      budget_analysis: budgetAnalysis,
+      savings_strategy: savingsStrategy,
+      debt_reduction: debtReduction
+    });
+
+  } catch (error) {
+    console.error('Financial Advisor Error:', error);
+    res.status(500).json({ message: error.message || 'Failed to generate financial advisor analysis' });
+  }
+};
+
 
 
 // @desc    Forecast Next Month's Needs
@@ -1045,5 +1081,6 @@ module.exports = {
   forecastNeeds,
   suggestAllocation,
   extractReceiptData,
-  suggestExpenseDetails
+  suggestExpenseDetails,
+  getFinancialAdvisorAnalysis
 };

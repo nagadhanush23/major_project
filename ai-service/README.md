@@ -1,4 +1,4 @@
-# AI Service - ExpenseEase
+# AI Service - FinFlow
 
 Separate microservice for AI-powered financial analysis using Groq API.
 
