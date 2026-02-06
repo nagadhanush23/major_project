@@ -1,0 +1,15 @@
+{
+  "name": "major-project-testing",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run install-all",
+    "install-all": "npm --prefix frontend install && npm --prefix server install && npm --prefix ai-service install",
+    "frontend": "npm --prefix frontend start",
+    "server": "npm --prefix server run dev",
+    "ai-service": "npm --prefix ai-service run dev",
+    "dev": "concurrently \"npm --prefix server run dev\" \"npm --prefix ai-service run dev\" \"npm --prefix frontend start\" --names \"BACKEND,AI-SERVICE,FRONTEND\" --prefix-colors \"blue,green,yellow\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

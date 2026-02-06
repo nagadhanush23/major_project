@@ -1,0 +1,9 @@
+# AI Service Dependencies (Frozen Snapshot)
+# Generated from npm list --depth=0
+
+axios@1.13.2
+cors@2.8.5
+dotenv@16.6.1
+express@4.21.2
+groq-sdk@0.3.3
+nodemon@3.1.11

@@ -1,0 +1,250 @@
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  /* Background is handled by body for full coverage */
+}
+
+/* Sidebar Styling */
+.dashboard-sidebar {
+  width: 280px;
+  background: var(--surface);
+  /* Fallback */
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-gradient-end) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: width var(--transition);
+}
+
+.sidebar-header {
+  padding: 2.5rem 2rem;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: var(--primary-gradient);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+  box-shadow: var(--primary-glow);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+  transform: translateX(4px);
+}
+
+.nav-item.active {
+  background: var(--primary);
+  /* Solid Green from reference */
+  background: var(--primary-gradient);
+  color: #000;
+  /* Dark text on green button for contrast, or white if dark green */
+  box-shadow: var(--primary-glow);
+  font-weight: 600;
+}
+
+/* Adjust text color for active state if primary is bright */
+[data-theme='dark'] .nav-item.active {
+  color: #000;
+}
+
+.nav-icon {
+  font-size: 1.25rem;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  /* Compact Floating Header - "Island" Style */
+  padding: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  /* Don't push content down */
+  z-index: 90;
+  background: transparent;
+  pointer-events: none;
+  /* Let clicks pass through empty areas */
+}
+
+[data-theme='dark'] .dashboard-header {
+  background: transparent;
+  border: none;
+}
+
+/* Profile Actions Pill */
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  pointer-events: auto;
+  /* Re-enable clicks for the pill */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-theme='dark'] .profile-actions {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-actions:hover {
+  transform: translateY(2px);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+.profile-action-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.profile-action-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.05);
+  border-color: transparent;
+  color: var(--primary);
+}
+
+.user-profile-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content Area */
+.dashboard-main {
+  flex: 1;
+  margin-left: 280px;
+  /* Header is inside main, so padding handled by containers */
+  min-height: 100vh;
+  position: relative;
+  padding-top: 4rem;
+  /* Give space for the content since header is now absolute */
+  position: relative;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .dashboard-sidebar {
+    width: 80px;
+  }
+
+  .sidebar-header {
+    padding: 2rem 1rem;
+    justify-content: center;
+  }
+
+  .logo-text,
+  .nav-label {
+    display: none;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .sidebar-nav {
+    padding: 1rem 0.75rem;
+  }
+
+  .nav-item {
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .nav-item:hover {
+    transform: none;
+  }
+
+  .dashboard-main {
+    margin-left: 80px;
+  }
+}
