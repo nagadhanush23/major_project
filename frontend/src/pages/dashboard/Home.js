@@ -60,7 +60,7 @@ const Home = () => {
 
   const testimonials = [
     {
-      text: "I used to stress about money every single day. ExpenseEase helped me see exactly where my money was going without making me feel guilty.",
+      text: "I used to stress about money every single day. FinFlow helped me see exactly where my money was going without making me feel guilty.",
       name: "Ananya Desai",
       role: "Freelance Designer",
       avatar: "AD"
@@ -105,7 +105,7 @@ const Home = () => {
             <div className="logo-icon-home">
               <FaDollarSign />
             </div>
-            <span>ExpenseEase</span>
+            <span>FinFlow</span>
           </div>
 
           <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
@@ -170,7 +170,7 @@ const Home = () => {
       <section id="features" className="section features-section">
         <div className="home-container">
           <div className="section-header">
-            <h2>Why ExpenseEase?</h2>
+            <h2>Why FinFlow?</h2>
             <p>Everything you need to take control, nothing you don't.</p>
           </div>
           <div className="features-grid">
@@ -223,7 +223,7 @@ const Home = () => {
         <div className="home-container">
           <div className="section-header">
             <h2>Success Stories</h2>
-            <p>See how ExpenseEase brings calm to financial chaos.</p>
+            <p>See how FinFlow brings calm to financial chaos.</p>
           </div>
 
           <div className="marquee-container">
@@ -260,7 +260,7 @@ const Home = () => {
       <footer className="site-footer">
         <div className="home-container footer-content">
           <div className="footer-brand">
-            <div className="nav-brand">ExpenseEase</div>
+            <div className="nav-brand">FinFlow</div>
             <p>Purpose-built tools to keep your money decisions grounded, confident, and calm.</p>
             <div className="footer-social-icons">
               <a href="#!" className="social-icon" aria-label="Twitter"><FaTwitter /></a>
@@ -300,7 +300,7 @@ const Home = () => {
           </div>
         </div>
         <div className="home-container footer-bottom">
-          <p>© {new Date().getFullYear()} ExpenseEase. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} FinFlow. All rights reserved.</p>
           <div className="footer-legal">
             <a href="#terms">Terms</a>
             <span className="separator">•</span>

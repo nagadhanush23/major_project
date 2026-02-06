@@ -1043,10 +1043,13 @@
 
 .chart-container {
   height: 300px;
+  min-height: 300px;
+  max-height: 300px;
   margin: 1.5rem 0;
   padding: 1rem;
   background: rgba(102, 126, 234, 0.02);
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .projection-stats {
@@ -1057,6 +1060,7 @@
   align-items: stretch;
   padding-top: 1.5rem;
   border-top: 2px solid #f3f4f6;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {

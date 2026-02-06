@@ -119,7 +119,7 @@ const OverviewPage = () => {
     // -- Logo/Title --
     doc.setFontSize(26);
     doc.setTextColor(255, 255, 255);
-    doc.text('ExpenseEase', 14, 25);
+    doc.text('FinFlow', 14, 25);
 
     doc.setFontSize(10);
     doc.setTextColor(200, 200, 200);
@@ -128,10 +128,10 @@ const OverviewPage = () => {
     // -- Company Details (Top Right) --
     doc.setFontSize(10);
     doc.setTextColor(255, 255, 255);
-    doc.text('ExpenseEase Inc.', pageWidth - 14, 15, { align: 'right' });
+    doc.text('FinFlow Inc.', pageWidth - 14, 15, { align: 'right' });
     doc.text('Level 5, Cyber Towers, Hitech City', pageWidth - 14, 20, { align: 'right' });
     doc.text('Hyderabad, TS 500081', pageWidth - 14, 25, { align: 'right' });
-    doc.text('support@expenseease.com', pageWidth - 14, 30, { align: 'right' });
+    doc.text('support@finflow.com', pageWidth - 14, 30, { align: 'right' });
 
     // -- Report Title & Date --
     doc.setTextColor(0, 0, 0);
@@ -246,7 +246,7 @@ const OverviewPage = () => {
       // Contact Info
       doc.setFontSize(8);
       doc.setTextColor(150);
-      doc.text('ExpenseEase Inc. | www.expenseease.com | +91 8000 9000', 14, pageHeight - 12);
+      doc.text('FinFlow Inc. | www.finflow.com | +91 8000 9000', 14, pageHeight - 12);
       doc.text(`Page ${i} of ${pageCount}`, pageWidth - 14, pageHeight - 12, { align: 'right' });
 
       doc.setFontSize(7);
@@ -254,7 +254,7 @@ const OverviewPage = () => {
       doc.text('This is a computer-generated document. No signature is required.', pageWidth / 2, pageHeight - 8, { align: 'center' });
     }
 
-    doc.save(`ExpenseEase_Report_${new Date().toISOString().split('T')[0]}.pdf`);
+    doc.save(`FinFlow_Report_${new Date().toISOString().split('T')[0]}.pdf`);
   };
 
   const handleDeleteTransaction = async (id) => {

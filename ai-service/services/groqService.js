@@ -822,3 +822,157 @@ module.exports = {
   suggestExpenseDetails,
   suggestAllocation
 };
+// @desc    Perform Budget Analysis
+const performBudgetAnalysis = async (financialData) => {
+  if (!groq) {
+    throw new Error('Groq API key not configured');
+  }
+
+  try {
+    const prompt = `
+You are a Budget Analysis Agent specialized in reviewing financial transactions and expenses.
+Analyze the following financial data:
+${JSON.stringify(financialData, null, 2)}
+
+Your tasks:
+1. Analyze income, transactions, and expenses in detail.
+2. Categorize spending into logical groups with clear breakdown.
+3. Identify spending patterns and trends across categories.
+4. Suggest specific areas where spending could be reduced with concrete suggestions.
+5. Provide actionable recommendations with specific, quantified potential savings amounts.
+
+Consider:
+- Number of dependants when evaluating household expenses.
+- Typical spending ratios for the income level.
+- Essential vs discretionary spending.
+
+Return ONLY valid JSON with this structure:
+{
+  "total_expenses": 0,
+  "monthly_income": 0,
+  "spending_categories": [{"category": "string", "amount": 0, "percentage": 0}],
+  "recommendations": [{"category": "string", "recommendation": "string", "potential_savings": 0}]
+}`;
+
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: 'Budget Analysis Agent. Return ONLY valid JSON.' },
+        { role: 'user', content: prompt }
+      ],
+      model: 'llama-3.1-8b-instant',
+      temperature: 0.3,
+      response_format: { type: 'json_object' }
+    });
+
+    return cleanAndParseJSON(completion.choices[0].message.content);
+  } catch (error) {
+    console.error('Budget Analysis Error:', error);
+    throw error;
+  }
+};
+
+// @desc    Perform Savings Strategy
+const performSavingsStrategy = async (financialData, budgetAnalysis) => {
+  if (!groq) {
+    throw new Error('Groq API key not configured');
+  }
+
+  try {
+    const prompt = `
+You are a Savings Strategy Agent.
+Financial Data: ${JSON.stringify(financialData)}
+Budget Analysis: ${JSON.stringify(budgetAnalysis)}
+
+Tasks:
+1. Recommend savings strategies.
+2. Calculate optimal emergency fund.
+3. Suggest savings allocation.
+4. Recommend automation techniques.
+
+Return ONLY valid JSON with this structure:
+{
+  "emergency_fund": {"recommended_amount": 0, "current_amount": 0, "current_status": "string"},
+  "recommendations": [{"category": "string", "amount": 0, "rationale": "string"}],
+  "automation_techniques": [{"name": "string", "description": "string"}]
+}`;
+
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: 'Savings Strategy Agent. Return ONLY valid JSON.' },
+        { role: 'user', content: prompt }
+      ],
+      model: 'llama-3.1-8b-instant',
+      temperature: 0.3,
+      response_format: { type: 'json_object' }
+    });
+
+    return cleanAndParseJSON(completion.choices[0].message.content);
+  } catch (error) {
+    console.error('Savings Strategy Error:', error);
+    throw error;
+  }
+};
+
+// @desc    Perform Debt Reduction Plan
+const performDebtReduction = async (financialData, budgetAnalysis, savingsStrategy) => {
+  if (!groq) {
+    throw new Error('Groq API key not configured');
+  }
+
+  try {
+    const prompt = `
+You are a Debt Reduction Agent.
+Financial Data: ${JSON.stringify(financialData)}
+Budget Analysis: ${JSON.stringify(budgetAnalysis)}
+Savings Strategy: ${JSON.stringify(savingsStrategy)}
+
+Tasks:
+1. Analyze debts.
+2. Create payoff plans (avalanche and snowball).
+3. Calculate interest and timeline.
+4. Provide recommendations.
+
+Return ONLY valid JSON with this structure:
+{
+  "total_debt": 0,
+  "debts": [],
+  "payoff_plans": {
+    "avalanche": {"total_interest": 0, "months_to_payoff": 0, "monthly_payment": 0},
+    "snowball": {"total_interest": 0, "months_to_payoff": 0, "monthly_payment": 0}
+  },
+  "recommendations": [{"title": "string", "description": "string", "impact": "string"}]
+}`;
+
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: 'Debt Reduction Agent. Return ONLY valid JSON.' },
+        { role: 'user', content: prompt }
+      ],
+      model: 'llama-3.1-8b-instant',
+      temperature: 0.3,
+      response_format: { type: 'json_object' }
+    });
+
+    return cleanAndParseJSON(completion.choices[0].message.content);
+  } catch (error) {
+    console.error('Debt Reduction Error:', error);
+    throw error;
+  }
+};
+
+module.exports = {
+  analyzeExpensePatterns,
+  analyzeInvestmentOpportunity,
+  analyzeSalaryAndCOL,
+  analyzeSavingsGoals,
+  generateGeneralInsights,
+  categorizeTransaction,
+  chatWithFinancialAssistant,
+  analyzeFinancialHealth,
+  extractReceiptData,
+  suggestExpenseDetails,
+  suggestAllocation,
+  performBudgetAnalysis,
+  performSavingsStrategy,
+  performDebtReduction
+};
