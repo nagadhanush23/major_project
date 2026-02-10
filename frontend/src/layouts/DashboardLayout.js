@@ -43,10 +43,8 @@ const DashboardLayout = () => {
       <aside className="dashboard-sidebar">
         <div className="sidebar-header">
           <div className="logo">
-            <div className="logo-icon">
-              <FaDollarSign />
-            </div>
-            <span className="logo-text">FinFlow</span>
+            <div className="logo-dot"></div>
+            <span className="logo-text">FinFlow.<span style={{ fontSize: '0.5em', verticalAlign: 'top', marginLeft: '2px', color: '#999' }}>TM</span></span>
           </div>
         </div>
 

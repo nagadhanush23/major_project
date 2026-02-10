@@ -1,7 +1,8 @@
-// client/src/pages/Register.js
+// client/src/pages/auth/Register.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import '../dashboard/Home.css'; // Import the modern UI styles
 
 const Register = () => {
   const navigate = useNavigate();
@@ -86,20 +87,22 @@ const Register = () => {
   };
 
   return (
-    <div className="register-wrapper">
-      <Link to="/" className="back-link">
-        ← Back to home
-      </Link>
+    <div className="home-wrapper modern-ui" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
 
-      <section className="heading">
-        <h1>Create an account</h1>
-        <p>Only the basics so you can log in right away.</p>
-      </section>
+      <div className="glass-panel" style={{ width: '100%', maxWidth: '450px', padding: '3rem', borderRadius: '24px' }}>
 
-      <section className="form">
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: '800', fontSize: '1.5rem', display: 'block', marginBottom: '2rem' }}>
+            FinFlow.<span style={{ color: 'var(--primary-green)' }}>.</span>
+          </Link>
+
+          <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Create Account</h1>
+          <p style={{ color: 'var(--text-light)' }}>Join thousands of users today.</p>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Full Name</label>
             <input
               id="name"
               name="name"
@@ -112,7 +115,7 @@ const Register = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             <input
               id="email"
               name="email"
@@ -136,18 +139,25 @@ const Register = () => {
               required
               minLength="6"
             />
+            <p style={{ fontSize: '0.75rem', color: '#888', marginTop: '0.5rem' }}>
+              Must be 8+ chars, include uppercase, lowercase & number.
+            </p>
           </div>
 
-          {error && <p className="error">{error}</p>}
-          {status && <p className="success-message">{status}</p>}
+          {error && <p className="error-message">{error}</p>}
+          {status && <p className="success-message" style={{ color: 'var(--primary-green)', textAlign: 'center', marginBottom: '1rem' }}>{status}</p>}
 
-          <div className="form-group">
-            <button type="submit" className="btn btn-block" disabled={isLoading}>
-              {isLoading ? 'Registering...' : 'Register'}
+          <div className="form-group" style={{ marginTop: '2rem' }}>
+            <button type="submit" className="btn btn-black" style={{ width: '100%', padding: '1rem' }} disabled={isLoading}>
+              {isLoading ? 'Creating Account...' : 'Create Account'}
             </button>
           </div>
+
+          <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-light)' }}>
+            Already have an account? <Link to="/" style={{ color: 'var(--primary-green)', fontWeight: '600', textDecoration: 'none' }}>Log in</Link>
+          </div>
         </form>
-      </section>
+      </div>
     </div>
   );
 };
