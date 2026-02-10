@@ -37,24 +37,22 @@
   gap: 1rem;
 }
 
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  background: var(--primary-gradient);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.25rem;
-  box-shadow: var(--primary-glow);
+.logo-dot {
+  width: 12px;
+  height: 12px;
+  background: #00E096;
+  /* Mint Green */
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 224, 150, 0.4);
 }
 
 .logo-text {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
+  /* Extra Bold */
   color: var(--text-main);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
 .sidebar-nav {
