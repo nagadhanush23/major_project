@@ -809,6 +809,7 @@ const suggestAllocation = async (data) => {
   }
 };
 
+
 module.exports = {
   analyzeExpensePatterns,
   analyzeInvestmentOpportunity,
@@ -822,6 +823,11 @@ module.exports = {
   suggestExpenseDetails,
   suggestAllocation
 };
+
+
+
+
+
 // @desc    Perform Budget Analysis
 const performBudgetAnalysis = async (financialData) => {
   if (!groq) {
@@ -871,6 +877,9 @@ Return ONLY valid JSON with this structure:
   }
 };
 
+
+
+
 // @desc    Perform Savings Strategy
 const performSavingsStrategy = async (financialData, budgetAnalysis) => {
   if (!groq) {
@@ -912,6 +921,9 @@ Return ONLY valid JSON with this structure:
     throw error;
   }
 };
+
+
+
 
 // @desc    Perform Debt Reduction Plan
 const performDebtReduction = async (financialData, budgetAnalysis, savingsStrategy) => {
@@ -959,6 +971,9 @@ Return ONLY valid JSON with this structure:
     throw error;
   }
 };
+
+
+
 
 module.exports = {
   analyzeExpensePatterns,
