@@ -19,6 +19,7 @@ import FinancialFlowPage from './pages/finance/FinancialFlowPage';
 // import SavingsGoalPage from './pages/finance/SavingsGoalPage';
 import AIChatPage from './pages/ai/AIChatPage';
 import FinanceAdvisorPage from './pages/ai/FinanceAdvisorPage';
+import FinancialChartsPage from './pages/dashboard/FinancialChartsPage';
 import UnderConstruction from './pages/general/UnderConstruction';
 import './index.css';
 
@@ -61,6 +62,7 @@ function App() {
                   {/* <Route path="savings-goals" element={<SavingsGoalPage />} /> */}
                   <Route path="ai-chat" element={<AIChatPage />} />
                   <Route path="financial-advisor" element={<FinanceAdvisorPage />} />
+                  <Route path="charts" element={<FinancialChartsPage />} />
                   <Route path="settings" element={<SettingsPage />} />
                 </Route>
                 <Route path="/status" element={<UnderConstruction />} />
