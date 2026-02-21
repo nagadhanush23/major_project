@@ -11,5 +11,9 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.0"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "all": "^0.0.0"
   }
 }
