@@ -83,26 +83,32 @@ export default function AddExpenseModal({ isOpen, onClose, onSave }) {
             const uploadResponse = await expenseAPI.uploadReceipt(formDataUpload);
             const fileUrl = uploadResponse.data.file_url;
 
+            // Set receipt URL immediately so user sees it's uploaded
+            setFormData((prev) => ({
+                ...prev,
+                receipt_url: fileUrl,
+            }));
+
             // Extract data from receipt using AI
             setIsAIProcessing(true);
-            const extractedResponse = await aiAPI.extractReceipt(fileUrl);
+            try {
+                // Use imageUrl for consistency, though backend now handles both
+                const extractedResponse = await aiAPI.extractReceipt(fileUrl);
 
-            if (extractedResponse.data.success !== false) {
-                setFormData((prev) => ({
-                    ...prev,
-                    receipt_url: fileUrl,
-                    vendor: extractedResponse.data.vendor || prev.vendor,
-                    amount: extractedResponse.data.amount || prev.amount,
-                    title: extractedResponse.data.title || prev.title,
-                    category: extractedResponse.data.category || prev.category,
-                    date: extractedResponse.data.date || prev.date,
-                }));
-            } else {
-                // Just save the receipt URL even if extraction failed
-                setFormData((prev) => ({
-                    ...prev,
-                    receipt_url: fileUrl,
-                }));
+                if (extractedResponse.data && extractedResponse.data.success !== false) {
+                    const extractedData = extractedResponse.data.data || extractedResponse.data;
+                    setFormData((prev) => ({
+                        ...prev,
+                        vendor: extractedData.vendor || prev.vendor,
+                        amount: extractedData.amount || prev.amount,
+                        title: extractedData.title || prev.title,
+                        category: extractedData.category || prev.category,
+                        date: extractedData.date || prev.date,
+                    }));
+                }
+            } catch (extractError) {
+                console.warn("AI Extraction failed, but receipt was uploaded:", extractError);
+                // Receipt is already saved in state, so we just continue
             }
         } catch (error) {
             console.error("Receipt upload error:", error);

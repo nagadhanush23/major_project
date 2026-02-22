@@ -1007,7 +1007,8 @@ const suggestAllocation = async (req, res) => {
 // @access  Private
 const extractReceiptData = async (req, res) => {
   try {
-    const { token, imageUrl, prompt } = req.body;
+    const imageUrl = req.body.imageUrl || req.body.file_url;
+    const { token, prompt } = req.body;
     if (!token) return res.status(401).json({ message: 'Token required' });
 
     if (!imageUrl) {

@@ -607,39 +607,41 @@ const extractReceiptData = async (imageUrl, prompt) => {
         console.error('Failed to fetch image for OCR:', fetchError.message);
         throw new Error('Failed to access receipt image');
       }
-    } else if (imageUrl.startsWith('/uploads/') || imageUrl.startsWith('\\\\uploads\\\\')) {
-      // It's a local file path relative to server root, likely in sibling directory
-      // We need to resolve it relative to ai-service execution
+    } else if (imageUrl.startsWith('/uploads/') || imageUrl.startsWith('\\uploads\\')) {
+      // It's a local file path relative to server root
       try {
         const path = require('path');
         const fs = require('fs');
 
-        // Remove leading slash/uploads prefix/etc to get just filename if possible, 
-        // or just rely on path construction. 
-        // Backend returns: /uploads/filename.jpg
+        // Path is like /uploads/filename.png
+        // Root is major_project_testing
+        // ai-service is in major_project_testing/ai-service
+        // server is in major_project_testing/server
 
-        // Construct absolute path to server/uploads
-        // Current file is in: ai-service/services/
-        const serverUploadsDir = path.join(__dirname, '../../server');
+        const rootDir = path.join(__dirname, '../../');
+        const serverDir = path.join(rootDir, 'server');
 
-        // Join server root with the imageUrl (which has /uploads/...)
-        // Note: path.join will treat /uploads/... as relative segment usually if not root
-        // But to be safe, let's explicit:
-        const relativePath = imageUrl.startsWith('/') ? imageUrl.substring(1) : imageUrl;
-        const layoutPath = path.join(serverUploadsDir, relativePath);
+        // Ensure path formatting is correct for the OS
+        const normalizedImageUrl = imageUrl.replace(/\\/g, '/');
+        const relativePath = normalizedImageUrl.startsWith('/') ? normalizedImageUrl.substring(1) : normalizedImageUrl;
+        const layoutPath = path.join(serverDir, relativePath);
 
-        console.log('Resolving local image path:', layoutPath);
+        console.log('🤖 Resolving local image path:', layoutPath);
 
         if (fs.existsSync(layoutPath)) {
           imageBuffer = fs.readFileSync(layoutPath);
+          console.log('✅ File found and read into buffer');
         } else {
-          // Fallback: try just current dir? No, unlikely.
+          console.error('❌ Local file not found at:', layoutPath);
           throw new Error(`Local file not found at ${layoutPath}`);
         }
       } catch (localError) {
-        console.error('Failed to read local file:', localError.message);
-        throw new Error('Failed to access local receipt file');
+        console.error('❌ Failed to read local file:', localError.message);
+        throw new Error('Failed to access local receipt file: ' + localError.message);
       }
+    } else {
+      console.warn('⚠️ Unrecognized imageUrl format:', imageUrl);
+      throw new Error('Invalid receipt image path format');
     }
 
     // 2. Perform OCR using Tesseract.js
